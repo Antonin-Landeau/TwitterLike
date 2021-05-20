@@ -1,0 +1,62 @@
+.Navbar{
+    height: 50px;
+    width: 100vw;
+    background-color: white;
+    box-shadow: 0px -3px 10px 0px rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.menu{
+    margin-right: 5%;
+}
+.Navbar_disconnect>a:nth-child(2){
+    margin-left: 25px;
+    border: solid 2.5px lightgreen;
+    background-color: lightgreen;
+    color: white;
+}
+.Navbar_disconnect>a:nth-child(2):hover{
+    background-color: white;
+    color: lightgreen;
+}
+.Navbar_disconnect>a:nth-child(1){
+    border: solid 2.5px lightgreen;
+    color: lightgreen;
+}
+.Navbar_disconnect>a:nth-child(1):hover{
+    background-color: lightgreen;  
+    color: white;
+}
+
+.Navbar_disconnect>a{
+    transition: all 0.3s;
+    padding: 0.2em 15px;
+    border-radius: 30px;
+    font-weight: 700;
+}
+
+.Navbar_disconnect_btn:hover{
+    cursor: pointer;
+}
+
+.Navbar_connect{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Navbar_logo{
+    font-family: Lobster;
+    font-size: 35px;
+    color: lightgreen;
+    justify-self: flex-start;
+    margin-left: 50%;
+    transform: translateX(-50%);
+
+
+}
+
