@@ -1,29 +1,59 @@
 .SignIn{
-    background-color: lightgreen;
+    background-color: white;
+    box-shadow: 0px 0px 20px 2px rgba(165, 165, 165, 0.75);
     width: 33vw;
-    min-width: 250px;
+    min-width: 375px;
     margin: 50px auto;
     padding: auto 30px;
     border-radius: 10px;
     text-align: center;
 }
-
+.SignIn_Form>p{
+    padding-bottom: 15px;
+}
+.SignIn_Form>p>a{
+    color: lightgreen;
+}
+.SignIn_Form>p>a:hover{
+    text-decoration: underline;
+}
 h2{
     padding: 10px;
     margin: 0;
-    border-bottom: solid green 1px;
 }
-
-.Input{
+.signInBtn{
+    transition: all 0.3s;
+    padding: 0.2em 15px;
+    border-radius: 30px;
+    font-weight: 700;
+    border: solid 2.5px lightgreen;
+    color: lightgreen;
+    background-color: white;
+    font-size: 16px;
     margin-bottom: 10px;
     margin-top: 10px;
+
 }
+.signInBtn:focus{
+    outline: none;
+}
+.signInBtn:hover{
+    cursor: pointer;  
+}
+.Input{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
 
 .Input>input{
     background: transparent;
     border:none;
-    border-bottom: 1px solid green;
+    border-bottom: 2px solid gray;
     position: relative;
+    width: 80%;
+    height: 25px;
+    font-size: 16px;
 }
 .Input>label{
     position: absolute;
@@ -32,3 +62,12 @@ h2{
 .Input>input:focus{
     outline: none;
 }
+
+.errorMessage{
+    color: lightcoral;
+    width: 80%;
+    font-size: 0.9rem;
+    margin: auto;
+    text-align: left;
+}
+

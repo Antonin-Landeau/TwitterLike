@@ -13,7 +13,6 @@ function Navbar() {
                 setconnect(!connect)
             }else {
                 setconnect(connect)
-
             }
           });
     }, [])

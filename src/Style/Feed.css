@@ -1,0 +1,48 @@
+.feedPage{
+    width: 45vw;
+    max-width: 450px;
+    min-width: 250px;
+    margin: auto;
+    border-right: 1px solid lightgrey;
+    border-left: 1px solid lightgrey;
+}
+
+.inputPost{
+    border-bottom: 2px solid lightgrey;
+    text-align: center;
+}
+
+.inputPost>input{
+    margin-bottom: 15px;
+    padding: 0;
+    width: 60%;
+}
+.inputPost>input:focus{
+    outline: none;
+}
+.inputPost>button{
+    margin-left: 15px;
+}
+.inputPost>button:hover{
+    cursor: pointer;
+}
+.inputPost>button:focus{
+    outline: none;
+}
+
+.inputPost>button,
+.inputPost>input{
+    height: 30px;
+}
+
+
+.post{
+    border-bottom: 1px solid lightgrey;    
+    padding: 5px 20px;
+}
+h3{
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(32, 32, 32);    
+}

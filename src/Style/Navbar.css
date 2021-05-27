@@ -12,6 +12,7 @@
 .menu{
     margin-right: 5%;
 }
+
 .Navbar_disconnect>a:nth-child(2){
     margin-left: 25px;
     border: solid 2.5px lightgreen;
@@ -59,4 +60,5 @@
 
 
 }
+
 

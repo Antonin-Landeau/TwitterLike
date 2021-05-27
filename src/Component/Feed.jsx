@@ -1,6 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {auth, db} from './../Firebase'
+import firebase from 'firebase/app'
+import './../Style/Feed.css'
+import Poste from './../Component/Poste'
+
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import CommentIcon from '@material-ui/icons/Comment';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 function Feed() {
     const [state, setstate] = useState(false)
@@ -23,21 +30,27 @@ function Feed() {
         });
     }
 
-    const createPost = (prenom, nom, poste) => {
+
+    const createPost = (prenom, nom, poste, uid) => {
         let date = new Date();
         if (prenom && nom && poste ) {
             db.collection("postes").add({
                 prenom: prenom,
                 nom: nom,
                 poste: poste,
-                date: date
+                date: date,
+                uid: uid,
+                likes: []
             })
             .then((docRef) => {
-                console.log("Document written with ID: ", docRef.id);
+                let postid = docRef.id;
+                console.log("Document written with ID: ", postid);
+                db.collection('postes').doc(postid).set({
+                    id: postid
+                }, { merge: true });
+                
             })
-            .catch((error) => {
-                console.error("Error adding document: ", error);
-            });
+
         }
 
     }
@@ -62,21 +75,43 @@ function Feed() {
     
     if(state === true){
         return (
-            <div>
-                <div>
+            <div className="feedPage">
+                <div className="inputPost">
                 <h2>Bienvenue sur le Feed {user.nom} {user.prenom}</h2>
                 <input value={postValue} type="text" onChange={e => setPostValue(e.target.value)}/>
                 <button onClick={() => {
-                    createPost(user.prenom, user.nom, postValue)
+                    createPost(user.prenom, user.nom, postValue, user.uid)
                     clearInput();
                 }}>Poster</button>
                 </div>
-                <div>
+                <div className="postContainer">
                     {posts.map((post,index) => {
                         return(
-                            <div key={index}>
+                            <div className="post" key={index}>
                                 <h3>{post.prenom} {post.nom}</h3>
                                 <p>{post.poste}</p>
+                                <div className="footer__post">
+                                    <FavoriteBorderIcon onClick={() => {
+                                        db.collection('postes').doc(post.id).get().then(doc => {
+                                            let postLikes = doc.data().likes;
+                                            if (!postLikes.includes(user.uid)) {
+                                                db.collection('postes').doc(post.id).update({
+                                                    likes: firebase.firestore.FieldValue.arrayUnion(user.uid)
+                                                })
+                                            }else {
+                                                db.collection('postes').doc(post.id).update({
+                                                    likes: firebase.firestore.FieldValue.arrayRemove(user.uid)
+                                                })
+                                            }
+                                        })
+                                        
+                                    }}></FavoriteBorderIcon>
+                                    <span className="like__conteur">{} </span>
+                                    <CommentIcon></CommentIcon>
+                                    {user.uid === post.uid ? <DeleteIcon onClick={()=>{
+                                        db.collection("postes").doc(post.id).delete()
+                                    }}></DeleteIcon> :''}
+                                </div>
                             </div>
                         )
                         
