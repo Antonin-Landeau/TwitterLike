@@ -5,9 +5,7 @@ import firebase from 'firebase/app'
 import './../Style/Feed.css'
 import Poste from './../Component/Poste'
 
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import CommentIcon from '@material-ui/icons/Comment';
-import DeleteIcon from '@material-ui/icons/Delete';
+
 
 function Feed() {
     const [state, setstate] = useState(false)
@@ -40,7 +38,8 @@ function Feed() {
                 poste: poste,
                 date: date,
                 uid: uid,
-                likes: []
+                likes: [],
+                nblike: 0
             })
             .then((docRef) => {
                 let postid = docRef.id;
@@ -87,34 +86,13 @@ function Feed() {
                 <div className="postContainer">
                     {posts.map((post,index) => {
                         return(
-                            <div className="post" key={index}>
-                                <h3>{post.prenom} {post.nom}</h3>
-                                <p>{post.poste}</p>
-                                <div className="footer__post">
-                                    <FavoriteBorderIcon onClick={() => {
-                                        db.collection('postes').doc(post.id).get().then(doc => {
-                                            let postLikes = doc.data().likes;
-                                            if (!postLikes.includes(user.uid)) {
-                                                db.collection('postes').doc(post.id).update({
-                                                    likes: firebase.firestore.FieldValue.arrayUnion(user.uid)
-                                                })
-                                            }else {
-                                                db.collection('postes').doc(post.id).update({
-                                                    likes: firebase.firestore.FieldValue.arrayRemove(user.uid)
-                                                })
-                                            }
-                                        })
-                                        
-                                    }}></FavoriteBorderIcon>
-                                    <span className="like__conteur">{} </span>
-                                    <CommentIcon></CommentIcon>
-                                    {user.uid === post.uid ? <DeleteIcon onClick={()=>{
-                                        db.collection("postes").doc(post.id).delete()
-                                    }}></DeleteIcon> :''}
-                                </div>
-                            </div>
+                            <Poste className="post" 
+                                key={index}
+                                data={post}
+                                user={user}
+                            ></Poste>
                         )
-                        
+
                     })}
                 </div>
             </div>
